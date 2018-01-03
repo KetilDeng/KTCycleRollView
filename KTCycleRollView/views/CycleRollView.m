@@ -7,7 +7,7 @@
 //
 
 #import "CycleRollView.h"
-#import "YYWebImage.h"
+#import "UIImageView+WebCache.h"
 #import "Masonry.h"
 
 const CGFloat kDotW = 5.0f;//圆点宽度
@@ -16,8 +16,9 @@ const CGFloat kDotH = 5.0f;//圆点高度
 const CGFloat kDotSpace = 4.0f;//圆点间间隔
 const CGFloat kSelectedAlpha = 1.0f;//当前选中透明度
 const CGFloat kNormalAlpha = 0.5f;//未选中透明度
-const CGFloat kMargin = 10.0f;//圆点距 左/右 距离(CycleRollPageControlAlignTypeLeft、CycleRollPageControlAlignTypeRight)
-const CGFloat kMarginBottom = 5.0f;//圆点距底部
+const CGFloat kMargin = 10.0f;//圆点距左/右距离
+const CGFloat kMarginBottom = 5.0f;//圆点距底部距离
+#define DOT_COLOR [UIColor whiteColor];//圆点颜色
 
 @interface CycleRollPageControl : UIPageControl
 
@@ -34,6 +35,7 @@ const CGFloat kMarginBottom = 5.0f;//圆点距底部
     for (NSUInteger subviewIndex = 0; subviewIndex < [self.subviews count]; subviewIndex++)
     {
         UIImageView* subview = [self.subviews objectAtIndex:subviewIndex];
+        subview.backgroundColor = DOT_COLOR;
         if (subviewIndex == page)
         {
             subview.alpha = kSelectedAlpha;
@@ -68,10 +70,6 @@ const CGFloat kMarginBottom = 5.0f;//圆点距底部
         case CycleRollPageControlAlignTypeRight:
             x = CGRectGetWidth(superView.frame) - newW - kMargin;
             break;
-            
-        default:
-            x = CGRectGetWidth(superView.frame)/2.0 - newW/2.0;
-            break;
     }
     self.frame = CGRectMake(x, y, newW, kDotH);
     
@@ -103,12 +101,12 @@ const CGFloat kMarginBottom = 5.0f;//圆点距底部
 
 @interface CycleRollView ()<UICollectionViewDelegate, UICollectionViewDataSource>
 
+@property (nonatomic, strong) UICollectionView *mainView;
 @property (nonatomic, strong) UICollectionViewFlowLayout *flowLayout;
 @property (nonatomic, strong) CycleRollPageControl *pageControl;
+@property (nonatomic, assign) CycleRollPageControlAlignType cycleRollPageControlAlign;
 @property (nonatomic, strong) UIImage *placeholderImage;
-
 @property (nonatomic, strong) NSMutableArray *datas;
-
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, assign) BOOL disableTimer;
 
@@ -245,10 +243,7 @@ const CGFloat kMarginBottom = 5.0f;//圆点距底部
     if ([imageObject isKindOfClass:[NSString class]])
     {
         NSString *imageUrl = (NSString *)imageObject;
-        [cell.imageView yy_setImageWithURL:[NSURL URLWithString:imageUrl]
-                     placeholder:self.placeholderImage
-                         options:YYWebImageOptionProgressiveBlur|YYWebImageOptionSetImageWithFadeAnimation
-                      completion:nil];
+        [cell.imageView sd_setImageWithURL:[NSURL URLWithString:imageUrl] placeholderImage:self.placeholderImage];
     }
     else
     {

@@ -64,7 +64,6 @@
         _cycleRollView.cycleRollViewClickItemBlock = ^(NSInteger currentIndex) {
             NSLog(@"%ld", currentIndex);
         };
-        _cycleRollView.cycleRollPageControlAlign = CycleRollPageControlAlignTypeRight;
     }
     return _cycleRollView;
 }
@@ -76,7 +75,6 @@
         _leftCycleRollView.cycleRollViewClickItemBlock = ^(NSInteger currentIndex) {
             NSLog(@"%ld", currentIndex);
         };
-        _leftCycleRollView.cycleRollPageControlAlign = CycleRollPageControlAlignTypeRight;
     }
     return _leftCycleRollView;
 }
@@ -84,7 +82,7 @@
 - (CycleRollView *)rightCycleRollView
 {
     if (!_rightCycleRollView) {
-        _rightCycleRollView = [CycleRollView cycleRollWithFrame:CGRectMake(0, CGRectGetMaxY(self.leftCycleRollView.frame)+40, SCREEN_WIDTH, 135) alignType:CycleRollPageControlAlignTypeRight placeholder:nil];
+        _rightCycleRollView = [CycleRollView cycleRollWithFrame:CGRectMake(0, CGRectGetMaxY(self.leftCycleRollView.frame)+40, SCREEN_WIDTH, 135) alignType:CycleRollPageControlAlignTypeRight placeholder:nil disableTimer:YES];
         _rightCycleRollView.cycleRollViewClickItemBlock = ^(NSInteger currentIndex) {
             NSLog(@"%ld", currentIndex);
         };

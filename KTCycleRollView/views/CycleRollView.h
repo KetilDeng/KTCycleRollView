@@ -27,9 +27,9 @@
 typedef void(^CycleRollViewClickItemBlock)(NSInteger currentIndex);
 
 typedef NS_ENUM(NSInteger, CycleRollPageControlAlignType) {
-    CycleRollPageControlAlignTypeCenter = 0, //居中对齐
-    CycleRollPageControlAlignTypeLeft = 1, //居左对齐
-    CycleRollPageControlAlignTypeRight = 2 //居右对齐
+    CycleRollPageControlAlignTypeCenter = 0, //圆点居中对齐
+    CycleRollPageControlAlignTypeLeft = 1, //圆点居左对齐
+    CycleRollPageControlAlignTypeRight = 2 //圆点居右对齐
 };
 
 @interface CycleRollView : UIView
@@ -38,14 +38,11 @@ typedef NS_ENUM(NSInteger, CycleRollPageControlAlignType) {
 + (instancetype)cycleRollWithFrame:(CGRect)frame alignType:(CycleRollPageControlAlignType)type placeholder:(UIImage *)image disableTimer:(BOOL)disableTimer;
 + (instancetype)cycleRollWithFrame:(CGRect)frame alignType:(CycleRollPageControlAlignType)type placeholder:(UIImage *)image;
 + (instancetype)cycleRollWithFrame:(CGRect)frame placeholder:(UIImage *)image;
-- (void)updataUI;
 
-@property (nonatomic, strong) UICollectionView *mainView;
 @property (nonatomic, copy) NSArray <NSString *> *imageURLs;//网络图片数组
 @property (nonatomic, copy) NSArray <UIImage *> *imageNames;//本地图片数组
 @property (nonatomic, assign) NSTimeInterval timeInterval;//自动滚动时间间隔
-@property (nonatomic, weak) id<CycleRollViewDelegate>delegate;//点击可实现的代理
+@property (nonatomic, weak) id<CycleRollViewDelegate>delegate;//点击回调可实现的代理
 @property (nonatomic, copy) CycleRollViewClickItemBlock cycleRollViewClickItemBlock;//点击回调block
-@property (nonatomic, assign) CycleRollPageControlAlignType cycleRollPageControlAlign;//圆点默认居中对齐
 
 @end
