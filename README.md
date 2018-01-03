@@ -31,11 +31,11 @@ typedef NS_ENUM(NSInteger, CycleRollPageControlAlignType) {
     CycleRollPageControlAlignTypeRight = 2 //圆点居右对齐
 };
 ```
-**image：**默认图片
+image：默认图片
 
-**disableTimer：**是否取消自动轮播
+disableTimer：是否取消自动轮播
 
-**delegate：**代理。如果要实现点击回调，可选择使用代理。也可以实现block
+delegate：代理。如果要实现点击回调，可选择使用代理。也可以实现block
 
 ```
 @property (nonatomic, copy) CycleRollViewClickItemBlock cycleRollViewClickItemBlock;//点击回调block

@@ -75,6 +75,7 @@
         _leftCycleRollView.cycleRollViewClickItemBlock = ^(NSInteger currentIndex) {
             NSLog(@"%ld", currentIndex);
         };
+        _leftCycleRollView.timeInterval = 5;
     }
     return _leftCycleRollView;
 }
